@@ -1,5 +1,5 @@
 import { Component, State, Prop} from '@stencil/core';
-import { MatchResults } from '@stencil/router';
+import { MatchResults, RouterHistory } from '@stencil/router';
 
 @Component({
   tag: 'app-details',
@@ -11,32 +11,56 @@ export class AppDetails {
 
  @State() data: any = [];
  @Prop() match: MatchResults;
+ @Prop() history : RouterHistory;
+
+
  
   componentWillLoad() {
     fetch('https://polymer-101-workshop.cleverapps.io/api/blogpost/'+this.match.params.idd)
     .then(res => res.json())
     .then(res => this.data = res);
     
-  }
+    }
+
+  back(){
+      alert("The article is deleted!");
+      this.history.goBack();
+     }
+
+  deletearticle() {
+      return fetch('https://polymer-101-workshop.cleverapps.io/api/blogpost/'+this.match.params.idd, {
+        method: 'delete'
+      }).then(response =>
+        response.json().then(json => {
+          return JSON.parse(json);
+        })
+      );
+    }
+    
+
+  handleClick = (ev: Event) => {
+      ev.preventDefault();
+      this.deletearticle();
+      this.back();
+
+    }
 
  render() {
   return (
-    <table>
-      <tr>
-           <th>Title</th>   
-           <th>Article</th> 
-           <th>Author</th> 
-           <th>Date</th>     
-      </tr> 
-      <tr>
-                           <td>{this.data.title}</td>
-                           <td> {this.data.article}</td> 
-                           <td>{this.data.autor}</td>
-                           <td>{this.data.creationDate}</td>
-       
-                       </tr>
-       
-  </table>
+    <div>
+         <h1>{this.data.title}</h1>
+         <p>{this.data.article} </p>
+         <span id="auth"><b>Author: </b>{this.data.autor}</span>
+         <span id="date"><b>Creation Date: </b>{this.data.creationDate}</span><br></br>
+         <button id="delete" onClick={ (ev: UIEvent) => this.handleClick(ev)}>DELETE</button>
+         <stencil-route-link url={`/edit/${this.data._id}`}>
+                                <button id="edit">
+                                     EDIT
+                                </button>
+         </stencil-route-link>
+  
+    </div>
+ 
 );
 }
 

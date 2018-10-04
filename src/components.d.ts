@@ -11,15 +11,27 @@ import '@stencil/router';
 import '@stencil/state-tunnel';
 import {
   MatchResults,
+  RouterHistory,
 } from '@stencil/router';
 
 
 export namespace Components {
 
   interface AppDetails {
+    'history': RouterHistory;
     'match': MatchResults;
   }
   interface AppDetailsAttributes extends StencilHTMLAttributes {
+    'history'?: RouterHistory;
+    'match'?: MatchResults;
+  }
+
+  interface AppEdit {
+    'history': RouterHistory;
+    'match': MatchResults;
+  }
+  interface AppEditAttributes extends StencilHTMLAttributes {
+    'history'?: RouterHistory;
     'match'?: MatchResults;
   }
 
@@ -43,6 +55,7 @@ export namespace Components {
 declare global {
   interface StencilElementInterfaces {
     'AppDetails': Components.AppDetails;
+    'AppEdit': Components.AppEdit;
     'AppHome': Components.AppHome;
     'AppNew': Components.AppNew;
     'AppProfile': Components.AppProfile;
@@ -51,6 +64,7 @@ declare global {
 
   interface StencilIntrinsicElements {
     'app-details': Components.AppDetailsAttributes;
+    'app-edit': Components.AppEditAttributes;
     'app-home': Components.AppHomeAttributes;
     'app-new': Components.AppNewAttributes;
     'app-profile': Components.AppProfileAttributes;
@@ -62,6 +76,12 @@ declare global {
   var HTMLAppDetailsElement: {
     prototype: HTMLAppDetailsElement;
     new (): HTMLAppDetailsElement;
+  };
+
+  interface HTMLAppEditElement extends Components.AppEdit, HTMLStencilElement {}
+  var HTMLAppEditElement: {
+    prototype: HTMLAppEditElement;
+    new (): HTMLAppEditElement;
   };
 
   interface HTMLAppHomeElement extends Components.AppHome, HTMLStencilElement {}
@@ -90,6 +110,7 @@ declare global {
 
   interface HTMLElementTagNameMap {
     'app-details': HTMLAppDetailsElement
+    'app-edit': HTMLAppEditElement
     'app-home': HTMLAppHomeElement
     'app-new': HTMLAppNewElement
     'app-profile': HTMLAppProfileElement
@@ -98,6 +119,7 @@ declare global {
 
   interface ElementTagNameMap {
     'app-details': HTMLAppDetailsElement;
+    'app-edit': HTMLAppEditElement;
     'app-home': HTMLAppHomeElement;
     'app-new': HTMLAppNewElement;
     'app-profile': HTMLAppProfileElement;

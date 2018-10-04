@@ -2,8 +2,8 @@
   padding: 10px;
 }
 
-button {
-  background: #5851ff;
+#delete, #edit {
+  background-color: black;
   color: white;
   margin: 8px;
   border: none;
@@ -19,34 +19,52 @@ button {
   cursor: pointer;
 }
   
-button:hover {
+#delete:hover, #edit:hover {
   box-shadow: 0 3px 6px rgba(0,0,0,.1), 0 1px 3px rgba(0,0,0,.1);
   transform: translateY(1px);
 }
 
-table{
-      margin: 0 auto;
-      margin-top: 50px;
-      border-collapse: collapse;
-}
-table th{
-  background-color:rgb(182, 182,182);
-  height: 70px;
+p{
+  margin-top: 30px;
 }
 
-table, td, th{
-      border-style: solid;
-      border-width: 2px;
-      border-color: rgb(182, 182,182);
+h1{
+ font-size: 2em;
 }
 
-table td, #tdarticle{
-                    text-align: center;
-                    width: 250px;
+h1{
+ text-align: center;
 }
 
-#tdarticle{
-  text-align: center;
-  width: 400px;
+p{
+  text-align: justify;
+  overflow:auto;
+
+}
+
+div{
+ text-align: justify;
+ margin:0 auto;
+ margin-top: 40px;
+ width: 1000px;
+ border-style: solid;
+ background-color: rgb(146,146,146);
+ padding: 5px;
+}
+
+#auth{
+  float: left;
+}
+
+#date{
+  float: right;
+}
+
+#delete{
+  float: left;
+}
+
+#edit{
+  float: right;
 }
 

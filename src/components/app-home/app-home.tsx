@@ -9,47 +9,45 @@ export class AppHome {
 
  @State() data: any = [];
 
+ 
   componentWillLoad() {
     fetch('https://polymer-101-workshop.cleverapps.io/api/blogpost')
-    .then(res => res.json())
-    .then(res => this.data = res);
+     .then(res => res.json())
+     .then(res => this.data = res);
   }
 
-  normalize(contenu: string): string {
-    if (contenu) {
-      return contenu.substring(0,140);
-    }
-    return 'null';
+
+  normalize(contenu: string): string {   //to make sure showing just the first 140 caracters from the article's content
+     if (contenu) {
+           return contenu.substring(0,140);
+                  }
+    return "Content not found for this box! ";
   }
+
 
  render() {
   return (
-    <table>
-      <tr>
-           <th>Title</th>   
-           <th>Article</th> 
-           <th>Author</th> 
-           <th>Date</th>     
-      </tr> 
+    <div id="global">
        {    
             this.data.map((item) => {
-               return (<tr>
-                           <td>{this.normalize(item.title)}</td>
-                           <td id="tdarticle">{this.normalize(item.article)} <a>...</a></td> 
-                           <td>{this.normalize(item.autor)}</td>
-                           <td>{item.creationDate}</td>
-                           <td>
+               return (<section>
+                           <h1>{this.normalize(item.title)}</h1>
+                           <div>{this.normalize(item.article)}...</div> 
+                           <p><b>Created By : </b>{this.normalize(item.autor)} <b>AT</b> {item.creationDate}</p>
+                           <p>
                               <stencil-route-link url={`/details/${item._id}`}>
                                 <button>
                                      For more details
                                 </button>
                               </stencil-route-link>
-                           </td>
-                       </tr>
+                            </p>
+                            <br></br>
+                       </section>
+                      
         )}
         )
       }
-  </table>
+    </div>
 );
 }
 
